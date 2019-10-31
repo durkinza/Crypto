@@ -5,10 +5,11 @@ class Cipher(object):
     """
     A template class for all ciphers.
     """
-    def __init__(self):
-        pass
 
-    def setup(self, args):
+    def __init__(self, parser):
+        self.parser = parser
+
+    def run(self, args):
         print(args)
 
     def encrypt(self):

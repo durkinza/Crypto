@@ -4,20 +4,22 @@ class affine (Cipher):
     """
     This is the affine module
     """
-    def __init__(self,):
-        pass
 
+    def run (self, args):
+        if args.Action == 'encrypt':
+            print(self.encrypt())
+        elif args.Action == 'decrypt':
+            print(self.decrypt())
+        else:
+            print("unknown action: "+args.Action)
 
-    def setup(self, args):
-        print(args)
-
-    def encrypt():
+    def encrypt(self):
         """
         Do Encryption
         """
         pass
 
-    def decrypt():
+    def decrypt(self):
         """
         Do Decryption
         """

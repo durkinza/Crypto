@@ -6,7 +6,8 @@ from collections import namedtuple
 
 from .. import __version__
 
-Menu = namedtuple("Menu", ["title", "route"])
+ciphers = {}
+
 def init_ciphers(subparser):
     """
     Searches for the load function in modules in the Crypto/ciphers folder.
@@ -19,4 +20,4 @@ def init_ciphers(subparser):
         if os.path.isdir(module) and module_name not in blacklist:
             module = "." + module_name
             module = importlib.import_module(module, package="crypto.ciphers")
-            module.load(subparser)
+            ciphers[module_name] = module.load(subparser)
