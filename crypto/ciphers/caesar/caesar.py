@@ -1,6 +1,6 @@
 from crypto import __version__
 from crypto.cipher import Cipher
-
+import sys
 
 class caesar (Cipher):
     """
@@ -10,12 +10,20 @@ class caesar (Cipher):
     message = ""
 
     def run(self, args):
-        self.shift = args.shift
-        self.message = args.message
+        if not args.message:
+            self.message = sys.stdin.read().strip()
+        else:
+            self.message = args.message
         if args.Action == 'encrypt':
+            self.shift = args.shift
             print(self.encrypt())
         elif args.Action == 'decrypt':
+            self.shift = args.shift
             print(self.decrypt())
+        elif args.Action == 'break':
+            for i in range(0, 26):
+                self.shift = i
+                print("n=%2d"%i, self.decrypt())
         else:
             print("unknown action: "+args.Action)
 

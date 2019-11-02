@@ -1,15 +1,111 @@
 from crypto import __version__
+import sys
+import random
 from crypto.cipher import Cipher
-
+from crypto.utils import find_pq_sets, factors, isPrime, phi, gcd, modinv
 class rsa (Cipher):
-    """
-    This is the RSA module
-    """
+	"""
+		This is the RSA module
+	"""
 
-    def run (self):
-        if args.Action == 'encrypt':
-            print(self.encrypt())
-        elif args.Action == 'decrypt':
-            print(self.decrypt())
-        else:
-            print("unknown action: "+args.Action)
+	def run (self, args):
+		if args.Action == 'encrypt':
+			if not args.message:
+				self.m = sys.stdin.read()
+			else:
+				self.m = args.message
+			self.n = args.n
+			self.e = args.e 
+			try:
+				print(self.encrypt())
+			except ValueError:
+				print("Input must be integers")
+			except Exception as e:
+				print( "Error: %s" % str(e) )
+		
+		elif args.Action == 'decrypt':
+			if not args.message:
+				self.m = sys.stdin.read()
+			else:
+				self.m = args.message
+			self.d = args.d
+			self.n = args.n 
+
+			try: 
+				print(self.decrypt())
+			except ValueError:
+				print("Input must be integers")
+			except Exception as e:
+				print( "Error: %s" % str(e) )
+		elif args.Action == 'make':
+			self.p = args.p
+			self.q = args.q
+			self.e = args.e or None
+			try:
+				print(self.make())
+			except Exception as e:
+				print( "Error: %s" % str(e) )
+
+		elif args.Action == 'break':
+			self.e = args.e
+			self.n = args.n
+			try:
+				print(self.reverse())
+			except Exception as e:
+				print( "Error: %s" % str(e) )
+		else:
+			print("unknown action: "+args.Action)
+
+	def encrypt (self):
+		res = ""
+		for i in self.m:
+			c = (ord(i) ** self.e) % self.n
+			res += str(int(c))+' '
+		return res
+
+	def decrypt (self):
+		res = ""
+		for j in self.m.strip().split(' '):
+			c = (int(j) ** self.d) % self.n
+			#print( chr(int(c)))
+			res += chr(c)
+		return res.strip()
+
+	def reverse (self):
+		if not self.e or not self.n:
+			print("-n and -e are required")
+		sets = find_pq_sets(self.n, self.e)
+		for i in range(len(sets)):
+			p = sets[i][0]
+			q = sets[i][1]
+			print('Trying: p='+str(p)+' q='+str(q))
+			phiN = (p - 1)*(q - 1)
+			print('     phiN: '+str(phiN))
+			d = modinv(self.e, phiN)
+			print('        d: '+str(d))
+			print('        e: '+str(self.e))
+			print('        n: '+str(self.n))
+		return ('Found: p='+str(p)+' q='+str(q))
+
+	def make (self):
+		if not isPrime(self.p):
+			raise Exception ("p must be prime")
+		if not isPrime(self.q):
+			raise Exception ("q must be prime")
+		d = None
+		while d == None:
+			n = self.p*self.q
+			phiN = (self.p - 1)*(self.q - 1)
+			facPhiN = factors(phiN)
+			if not self.e:
+				self.e = random.randrange(2, phiN)
+				while d == None:
+					while self.e in facPhiN:
+						self.e = random.randrange(2, phiN)
+					try:
+						d = modinv(self.e, phiN)
+					except:
+						self.e = random.randrange(2, phiN)
+			else:
+				d = modinv(self.e, phiN)
+		return ("Private d: %s\nPublic  e: %s\nPublic  n: %s" % (d, self.e, n))
