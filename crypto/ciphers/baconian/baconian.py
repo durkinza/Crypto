@@ -16,15 +16,18 @@ class baconian (Cipher):
 			self.m = sys.stdin.read().strip()
 		else:
 			self.m = args.message
-		if not args.distinct:
-			self.distinct = False
-			self.message = self.message.replace("jJvV", "iIuU")
+		if hasattr(args, 'notDistinct') and args.notDistinct:
+			self.notDistinct = True
+			self.Ualph = 'ABCDEFGHIKLMNOPQRSTUWXYZ'
+			self.m = self.m.replace("j", "i").replace("J", "J").replace("v", "u").replace("V", "U")
 		else:
-			self.distince = True
+			self.notDistinct = False
 		if args.Action == 'encrypt':
 			print(self.encrypt())
 		elif args.Action == 'decrypt':
 			print(self.decrypt())
+		elif args.Action == 'swap':
+			print(self.swapBaconian())
 		else:
 			print("unknown action: "+args.Action)
 
