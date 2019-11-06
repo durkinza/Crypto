@@ -1,5 +1,5 @@
 from .. import __version__
-
+from math import gcd as bltin_gcd
 from functools import reduce
 
 def find_pq_sets(n, e):
@@ -86,4 +86,11 @@ def gcd(x, y):
 	while(y):
 		x, y = y, x % y
 	return x
+
+
+def coprime(a, m):
+        """
+                Indicates whether two numbers are coprimes (relatively prime)
+        """
+        return bltin_gcd(a, m) == 1
 
