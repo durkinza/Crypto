@@ -13,6 +13,10 @@ class affine (Cipher):
     message = "" # message for encryption or decryption
     m = 26 # size of alphabet
 
+    # if true, will format output nicely. if false, will just print ciphertext or plaintext
+    nice_output = False 
+    
+
     def run (self, args):
         if not args.message:
             self.message = sys.stdin.read().strip()
@@ -26,22 +30,28 @@ class affine (Cipher):
                 print("a = " + str(self.a) + " is not relatively prime to " + str(self.m))
                 exit()
             self.b = args.b
-            print("\nAffine Encryption")
-            print("---------------------")
-            print("Given Plaintext: \t" + self.message)
-            print("Encrypted Ciphertext: \t" + self.encrypt())
-            print("---------------------")
+            if self.nice_output: # checks for which output to use - if true, prints nicely
+                print("\nAffine Encryption")
+                print("---------------------")
+                print("Given Plaintext: \t" + self.message)
+                print("Encrypted Ciphertext: \t" + self.encrypt())
+                print("---------------------")
+            else: # otherwise, prints just plaintext or ciphertext to allow for piping
+                print(self.encrypt())
         elif args.Action == 'decrypt':
             self.a = args.a
             if not coprime(self.a, self.m): # checks if a is coprime to 26
                 print("a = " + str(self.a) + " is not relatively prime to " + str(self.m))
                 exit()
             self.b = args.b
-            print("\nAffine Decryption")
-            print("--------------------")
-            print("Given Ciphertext: \t" + self.message)
-            print("Decrypted Plaintext: \t" + self.decrypt())
-            print("--------------------")
+            if self.nice_output: # checks for which output to use - if true, prints nicely
+                print("\nAffine Decryption")
+                print("--------------------")
+                print("Given Ciphertext: \t" + self.message)
+                print("Decrypted Plaintext: \t" + self.decrypt())
+                print("--------------------")
+            else: # otherwise, prints just plaintext or ciphertext to allow for piping
+                print(self.decrypt())
         else:
             print("unknown action: " + args.Action)
 
