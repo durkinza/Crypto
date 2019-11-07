@@ -28,7 +28,7 @@ class b64 (Cipher):
 	def decrypt(self):
 		out = b''
 		padding = 0
-		while(out == b'' and padding < 2):
+		while(out == b'' and padding <= 2):
 			try:
 				out = base64.b64decode(self.message)
 			except base64.binascii.Error:
