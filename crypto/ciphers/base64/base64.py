@@ -26,4 +26,12 @@ class b64 (Cipher):
         
 
 	def decrypt(self):
-		return base64.b64decode(self.message)
+		out = b''
+		padding = 0
+		while(out == b'' and padding < 2):
+			try:
+				out = base64.b64decode(self.message)
+			except base64.binascii.Error:
+				padding += 1
+				self.message = self.message+b'='
+		return out
