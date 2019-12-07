@@ -21,14 +21,18 @@ def main(passed_args=None):
 	# if we want to see available ciphers, print out their help
 	if args.list :
 		for cipher, obj in ciphers.items():
-			obj.parser.print_help()
-			print("\n")
+			#obj.parser.print_help()
+			c  = obj.load_cipher(sp)
+			c.print_short_description()
+			#c.print_long_description()
+			#print(cipher)
 		# exit after printing available ciphers
 		exit(0)
 
 	# if we want to do a cipher, run that object
 	if args.Cipher :
-		ciphers[args.Cipher].run(args)
+		c = ciphers[args.Cipher].load_cipher(sp)
+		c.run(args)
 	else:
 		parser.print_help()
 

@@ -11,7 +11,15 @@ class baconian (Cipher):
 	message = ""
 	Ualph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
+	def print_short_description(self):
+		print("baconian:\n\tBaconian Cipher\n\tThis cipher converts each character to a binary representation, often represented in A's and B's.\n")
+
+	def print_long_description(self):
+		print("Baconian Cipher:\n\tOriginally desgined by Francis Bacon, this cipher uses two alternating values to encode a messsage.\n\tEach character is give a binary representation (a=00000, b=00001, ..., z=10111)\n\t\tIn the case of this version of the cipher, the 0's are returned as A and 1's are returned as B.\n\tThis cipher is best used when hidden in plain sight. \n\t\tex. A message is encoded into a article using two font types. A's being font 1, B's being font 2.")
+
 	def run(self, args):
+		if args.Action == 'info':
+			return self.print_long_description()
 		if not args.message:
 			self.m = sys.stdin.read().strip()
 		else:

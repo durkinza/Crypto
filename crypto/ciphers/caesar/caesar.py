@@ -9,7 +9,15 @@ class caesar (Cipher):
     shift = 0
     message = ""
 
+    def print_short_description(self):
+        print("caesar:\n\tCaesar Cipher\n\tA basic rotation cipher.\n")
+
+    def print_long_description(self):
+        print("Caesar Cipher:\n\tGiven a rotation value x. Each character is replaced with the character that is x placed further down in the alphabet (continuing back to the start when we go past the end).\n\tEx. Rotate: 10\n\tHello -> Rovvy")
+
     def run(self, args):
+        if args.Action == 'info':
+            return self.print_long_description()
         if not args.message:
             self.message = sys.stdin.read().strip()
         else:

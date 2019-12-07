@@ -2,10 +2,10 @@ from crypto import __version__
 from .vigenere import vigenere
 
 
-
-def load(subparser):
+def load_args(subparser):
 	parser = subparser.add_parser('vigenere', help='vigenère cipher')
 	sp = parser.add_subparsers(dest="Action", required=True)
+	info = sp.add_parser("info", help="Give details about the cipher")
 	
 	# Encrypt a message
 	enc = sp.add_parser("encrypt", help="Encrypt the message")
@@ -19,5 +19,7 @@ def load(subparser):
 	dec.add_argument("passphrase", help="The edecrytion passphrase")
 	dec.add_argument("--message", "-m", help="The Message (default reads from stdin)")
 	
+
+def load_cipher(parser):
 	obj = vigenere(parser)
 	return obj
