@@ -16,16 +16,12 @@ def main(passed_args=None):
 	parser.add_argument('--list', '-l', help="list available ciphers", action="store_true")
 	argcomplete.autocomplete(parser)
 	args = parser.parse_args()
-	#args_dict = vars(args)
 
 	# if we want to see available ciphers, print out their help
 	if args.list :
 		for cipher, obj in ciphers.items():
-			#obj.parser.print_help()
 			c  = obj.load_cipher(sp)
 			c.print_short_description()
-			#c.print_long_description()
-			#print(cipher)
 		# exit after printing available ciphers
 		exit(0)
 
