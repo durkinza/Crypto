@@ -84,14 +84,14 @@ class baconian (Cipher):
 				spaceAdded = False
 			else:
 				if not spaceAdded:
-					out += ' ';
+					out += ' '
 					spaceAdded = True
 		return out				
 
 	def decode(self):
-		out = '';
-		buf = '';
-		addSpace = False;
+		out = ''
+		buf = ''
+		addSpace = False
 
 		s = self.m.upper()
 		s = s.replace('01', 'AB')
