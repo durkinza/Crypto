@@ -54,20 +54,6 @@ def egcd(a, b):
 		g, y, x = egcd(b % a, a)
 		return (g, x - (b // a) * y, y)
 
-def xgcd(a,b):
-	"""
-		Extended Euclidean Algorithum from 
-		http://anh.cs.luc.edu/331/notes/xgcd.pdf
-		Useful for negative numbers 
-	"""
-	prevx, x = 1, 0; prevy, y = 0, 1
-	while b:
-		q = a/b
-		x, prevx = prevx - q*x, x
-		y, prevy = prevy - q*y, y
-		a, b = b, a % b
-	return a, prevx, prevy
-
 
 def modinv(a, m):
     g, x, y = egcd(a, m)
@@ -88,8 +74,16 @@ def gcd(x, y):
 
 
 def coprime(a, m):
-        """
-                Indicates whether two numbers are coprimes (relatively prime)
-        """
-        return bltin_gcd(a, m) == 1
+	"""
+    	Indicates whether two numbers are coprimes (relatively prime)
+	"""
+	x = egcd(a, m)[0]
+	# indicates relatively prime
+	if x == 1:
+		return True
+		
+	# indicates not relatively prime
+	else:
+		return False
+
 
