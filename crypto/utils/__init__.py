@@ -27,8 +27,10 @@ def factors(n):
 def isPrime(Number):
 	"""
 		returns True or False for if a number is prime
+		This uses Fermat's Primailty test for checking if a number is a candidate prime. 
+		Note, this algorithum and may result in false positives .
 	"""
-	return 2 in [Number, 2**Number % Number]
+	return 1 in [Number, 2**(Number-1) % Number]
 
 
 def phi(n):
