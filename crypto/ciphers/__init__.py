@@ -20,4 +20,5 @@ def init_ciphers(subparser):
         if os.path.isdir(module) and module_name not in blacklist:
             module = "." + module_name
             module = importlib.import_module(module, package="crypto.ciphers")
-            ciphers[module_name] = module.load(subparser)
+            module.load_args(subparser)
+            ciphers[module_name] = module

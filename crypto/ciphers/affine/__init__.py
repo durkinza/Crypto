@@ -2,9 +2,10 @@ from crypto import __version__
 from .affine import affine
 
 
-def load(subparser):
+def load_args(subparser):
     parser = subparser.add_parser('affine', help='Affine cipher')
     sp = parser.add_subparsers(dest="Action", required=True)
+    info = sp.add_parser("info", help="Give details about the cipher")
 
         # Encrypt the message
     enc = sp.add_parser("encrypt", help="Encrypt the message")    
@@ -18,5 +19,6 @@ def load(subparser):
     dec.add_argument("--b", "-b", type=int, help="The second half of the key (a,b)", required=True)
     dec.add_argument("--message", "-m", help="The Message")
 
+def load_cipher(parser):
     obj = affine(parser)
     return obj

@@ -12,6 +12,12 @@ class Cipher(object):
     def run(self, args):
         print(args)
 
+    def print_short_description(self):
+        print("A short description not implemented yet")
+
+    def print_long_description(self):
+        print("A long description not implemented yet")
+
     def encrypt(self):
         print("cipher encrypt not implemented yet")
         pass

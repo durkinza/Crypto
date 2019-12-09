@@ -1,9 +1,11 @@
 from crypto import __version__
 from .rsa import rsa
 
-def load(subparser):
+def load_args(subparser):
     parser = subparser.add_parser('rsa', help='RSA cipher')
     sp = parser.add_subparsers(dest="Action", required=True)
+    info = sp.add_parser("info", help="Give details about the cipher")
+
 	# Encrypt a message
     enc = sp.add_parser("encrypt", help="Encrypt the message")
     enc.add_argument("n", type=int, help="The public key n")
@@ -27,5 +29,6 @@ def load(subparser):
     brk.add_argument("n", type=int, help="The public key n")
     brk.add_argument("e", type=int, help="The public key e")
 
+def load_cipher(parser):
     obj = rsa(parser)
     return obj

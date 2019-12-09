@@ -9,7 +9,15 @@ class b64 (Cipher):
 	"""
 	message = b''
 
+	def print_short_description(self):
+		print("base64:\n\tBase64 Cipher (MIME)\n\tUsed to encoded binary into ascii safe text. Often recognized by the ending == or = which is used as padding.\n")
+
+	def print_long_description(self):
+		print("Base64:\n\tAlso refered to as MIME, Base64 is primarly used to encode binary values into ascii safe text.\n\tBinary values of characters (normally 8 bits) are split into 6 bit values.\n\t\tPadding is added to the end of the string using either = or == to maintain a size that is a factor of 8")
+
 	def run(self, args):
+		if args.Action == 'info':
+			return self.print_long_description()
 		if not args.message:
 			self.message = str.encode(sys.stdin.read().strip())
 		else:

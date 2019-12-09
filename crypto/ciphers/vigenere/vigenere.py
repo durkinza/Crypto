@@ -14,7 +14,15 @@ class vigenere (Cipher):
 	table = {}
 	message = ""
 
+	def print_short_description(self):
+		print("vigenere:\n\tVigenère Cipher\n\tA series of caesar ciphers unique for each characters.\n")
+
+	def print_long_description(self):
+		print("Vigenère Cipher:\n\tThe Vigenère Cipher takes a string of characters as a key.\n\tEach character in the message is ran through a caesar, using the offset of the key as the shift number for that character.")
+
 	def run(self, args):
+		if args.Action == 'info':
+			return self.print_long_description()
 		if not args.message:
 			self.message = sys.stdin.read().strip()
 		else:

@@ -15,9 +15,17 @@ class affine (Cipher):
 
     # if true, will format output nicely. if false, will just print ciphertext or plaintext
     nice_output = False 
+	
+    def print_short_description(self):
+        print("affine:\n\tAffine Cipher\n\tConverts characters to numeric values, performs a mathematic operation on the values, and then converts the numbers back into characters.\n")
+
+    def print_long_description(self):
+        print("Affine Cipher:\n\tCharacters are converted to numeric values (a=0, ..., z=25).\n\tA mathematic operation (α*M + β) mod 26 = C  is perfomed using the given alpha (α) and beta (β).\n\t\tWhere M is the plaintext numeric value of the character and C is the encoded numeric value.\n\tFinally the encoded value is converted from a numeric value back into a character.")
     
 
     def run (self, args):
+        if args.Action == 'info':
+            return self.print_long_description()
         if not args.message:
             self.message = sys.stdin.read().strip()
             self.lowercase_message = str.lower(self.message)
