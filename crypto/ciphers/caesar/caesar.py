@@ -42,8 +42,10 @@ class caesar (Cipher):
                 cipher = cipher + char
             elif  char.isupper():
                 cipher = cipher + chr((ord(char) + self.shift - 65) % 26 + 65)
-            else:
+            elif char.islower():
                 cipher = cipher + chr((ord(char) + self.shift - 97) % 26 + 97)
+            else: # assumes non alphabetic character - adds punctuation with no encryption
+                cipher = cipher + char
         return cipher
 
     def decrypt(self):
@@ -53,6 +55,8 @@ class caesar (Cipher):
                 cipher = cipher + char
             elif  char.isupper():
                 cipher = cipher + chr((ord(char) + (-self.shift) - 65) % 26 + 65)
-            else:
+            elif char.islower():
                 cipher = cipher + chr((ord(char) + (-self.shift) - 97) % 26 + 97)
+            else: # assumes non alphabetic character - adds punctuation with no encryption
+                cipher = cipher + char
         return cipher
