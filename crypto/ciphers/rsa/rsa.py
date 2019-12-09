@@ -2,7 +2,7 @@ from crypto import __version__
 import sys
 import random
 from crypto.cipher import Cipher
-from crypto.utils import find_pq_sets, factors, isPrime, phi, gcd, modinv
+from crypto.utils import find_pq_sets, factors, isPrime, gcd, modinv
 class rsa (Cipher):
 	"""
 		This is the RSA module
@@ -12,7 +12,7 @@ class rsa (Cipher):
 		print("rsa:\n\tRSA Cryptosystem\n\tAn asymetric cipher that relys on the difficulty of finding the prime factors of a number.\n")
 
 	def print_long_description(self):
-		print("Rivest–Shamir–Adleman (RSA):\n\tThis asymetric cipher starts by finding 2 prime numbers p and q.\n\tn will be public. n = p * q\n\tThe phi(n) will be calculated as phi(n) = (p - 1) * (q - 1) This will be used later.\n\tThe public key e will be selected randomly as a number between 1 and phi(n), such that phi(n) and e have no common factors.\n\tThe secret key d will be calculated as the modular inverse of phi(n) and e. e * d = 1 mod phi(n).\n\tFinally the public and private keys are given as Private(n,d) and Public(n,e)\n\n\tEncrypting a message M to ciphertext C is done as \n\tM^d mod n = C\n\n\tDecrypting a ciphertext C to message M is done as\n\tC^e mod n = C")
+		print("Rivest–Shamir–Adleman (RSA):\n\tThis asymetric cipher starts by finding 2 prime numbers p and q.\n\tn will be public. n = p * q\n\tThe phi(n) will be calculated as phi(n) = (p - 1) * (q - 1) This will be used later.\n\tThe public key e will be selected randomly as a number between 1 and phi(n), such that phi(n) and e have no common factors.\n\tThe secret key d will be calculated as the modular inverse of phi(n) and e. e * d = 1 mod phi(n).\n\tFinally the public and private keys are given as Private(n,d) and Public(n,e)\n\n\tEncrypting a message M to ciphertext C is done as \n\tM^e mod n = C\n\n\tDecrypting a ciphertext C to message M is done as\n\tC^d mod n = C")
 
 	def run (self, args):
 		if args.Action == 'info':
