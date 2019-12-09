@@ -1,6 +1,6 @@
 __version__ = '0.1.0.dev0'
 import sys
-import argparse, argcomplete
+import argparse
 import os
 import importlib
 from os.path import dirname, basename, isfile, join
@@ -14,7 +14,11 @@ def main(passed_args=None):
 	# load in all sub-modules
 	init_ciphers(sp)
 	parser.add_argument('--list', '-l', help="list available ciphers", action="store_true")
-	argcomplete.autocomplete(parser)
+	try:
+		import argcomplete
+		argcomplete.autocomplete(parser)
+	except e:
+		pass
 	args = parser.parse_args()
 
 	# if we want to see available ciphers, print out their help
