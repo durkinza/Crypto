@@ -83,7 +83,7 @@ class rsa (Cipher):
 	def reverse (self):
 		if not self.e or not self.n:
 			print("-n and -e are required")
-		sets = find_pq_sets(self.n, self.e)
+		sets = find_pq_sets(self.n)
 		for i in range(len(sets)):
 			p = sets[i][0]
 			q = sets[i][1]

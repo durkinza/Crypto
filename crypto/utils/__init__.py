@@ -2,9 +2,9 @@ from .. import __version__
 from math import gcd as bltin_gcd
 from functools import reduce
 
-def find_pq_sets(n, e):
+def find_pq_sets(n):
 	"""
-		returns a set of prime factors for n and e
+		returns a set of prime factors for n
 	"""
 	facN = factors(n)[2:]
 	pFacN = []
@@ -12,11 +12,8 @@ def find_pq_sets(n, e):
 	for i in range(0, len(facN), 2):
 		if(isPrime(facN[i]) and isPrime(facN[i+1])):
 			pFacN.append([facN[i], facN[i+1]])
-    #if(len(pFacN)>1):
-    #    print('Multiple factors available')
-    #    print(pFacN)
 	if(len(pFacN)<=0):
-		raise Exception ('No prime factors available for '+str(n)+' and '+str(e))
+		raise Exception ('No prime factors available for '+str(n))
 	return pFacN
 
 
