@@ -2,6 +2,7 @@ from crypto import __version__
 from crypto.cipher import Cipher
 import sys
 
+
 class caesar (Cipher):
     """
     This is the caesar module
@@ -31,7 +32,7 @@ class caesar (Cipher):
         elif args.Action == 'break':
             for i in range(0, 26):
                 self.shift = i
-                print("n=%2d"%i, self.decrypt())
+                print("n=%2d" % i, self.decrypt())
         else:
             print("unknown action: "+args.Action)
 
@@ -40,11 +41,11 @@ class caesar (Cipher):
         for char in self.message:
             if char == ' ':
                 cipher = cipher + char
-            elif  char.isupper():
+            elif char.isupper():
                 cipher = cipher + chr((ord(char) + self.shift - 65) % 26 + 65)
             elif char.islower():
                 cipher = cipher + chr((ord(char) + self.shift - 97) % 26 + 97)
-            else: # assumes non alphabetic character - adds punctuation with no encryption
+            else:  # assumes non alphabetic character - adds punctuation with no encryption
                 cipher = cipher + char
         return cipher
 
@@ -53,10 +54,12 @@ class caesar (Cipher):
         for char in self.message:
             if char == ' ':
                 cipher = cipher + char
-            elif  char.isupper():
-                cipher = cipher + chr((ord(char) + (-self.shift) - 65) % 26 + 65)
+            elif char.isupper():
+                cipher = cipher + \
+                    chr((ord(char) + (-self.shift) - 65) % 26 + 65)
             elif char.islower():
-                cipher = cipher + chr((ord(char) + (-self.shift) - 97) % 26 + 97)
-            else: # assumes non alphabetic character - adds punctuation with no encryption
+                cipher = cipher + \
+                    chr((ord(char) + (-self.shift) - 97) % 26 + 97)
+            else:  # assumes non alphabetic character - adds punctuation with no encryption
                 cipher = cipher + char
         return cipher

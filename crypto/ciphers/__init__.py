@@ -8,6 +8,7 @@ from .. import __version__
 
 ciphers = {}
 
+
 def init_ciphers(subparser):
     """
     Searches for the load function in modules in the Crypto/ciphers folder.
