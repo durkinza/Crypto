@@ -423,5 +423,5 @@ class aes (Cipher):
                 output = output + chr(x)
             self.block = self.get_block()
         # remove extra block of padding
-        #output = self.unpad(output)
+        output = self.unpad(output)
         return output.strip()
