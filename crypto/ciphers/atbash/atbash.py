@@ -15,10 +15,10 @@ class atbash (Cipher):
     m = 26
 
     def print_short_description(self):
-        print("atbash:\n\tAtbash Cipher\n\tAn Affine cipher with a and b set to 25.\n")
+        print("atbash:\n\tAtbash Cipher\n\tCharacters are converted to their alphabetic opposite. A <--> Z, B <--> Y, etc.\n")
 
     def print_long_description(self):
-        print("Atbash Cipher:\n\tCharacters are converted to numeric values (a=0, ..., z=25).\n\tA mathematic operation (α*M + β) mod 26 = C  is perfomed using the given alpha (α) and beta (β).\n\t\tWhere M is the plaintext numeric value of the character and C is the encoded numeric value.\n\tFinally the encoded value is converted from a numeric value back into a character.")
+        print("Atbash Cipher:\n\tCharacters are converted to their alphabetic opposites. A becomes Z, B becomes Y, etc.\n\tThe same effect can be made by using an Affine cipher with a and b set to 25")
 
     def run(self, args):
         if args.Action == 'info':
